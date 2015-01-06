@@ -3,7 +3,7 @@ var sass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var changed = require('gulp-changed');
 
-var basePath = "../dkfpilot/src/main/projects/Eika.DKF.Web.Portal";
+var basePath = "../digitale-kundeflater/src/main/projects/Eika.DKF.Web.Portal";
 var prodPath = "../../websites/terra.eikadev.no/Website";
 
 var paths = {
@@ -28,8 +28,7 @@ gulp.task('js', function() {
 gulp.task('sass', function () {
     gulp.src(basePath + paths.sass + '/*.scss')
         .pipe(sass({
-            style: 'compact',
-            sourcemapPath: "",
+            style: 'compressed',
             sourcemap: false
         }))
         .pipe(gulp.dest(basePath + paths.css))
@@ -54,4 +53,4 @@ gulp.task('startWatch', function () {
 
 gulp.task('watch', ['js', 'sass', 'sass-dev', 'templates', 'startWatch']);
 
-gulp.task('default', ['sass', 'js']);
+gulp.task('default', ['sass']);
