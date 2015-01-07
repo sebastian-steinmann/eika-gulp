@@ -29,7 +29,8 @@ gulp.task('sass', function () {
     gulp.src(basePath + paths.sass + '/*.scss')
         .pipe(sass({
             style: 'compressed',
-            sourcemap: false
+            sourcemap: false,
+            container: "gulp-ruby-sass-production"
         }))
         .pipe(gulp.dest(basePath + paths.css))
 });
