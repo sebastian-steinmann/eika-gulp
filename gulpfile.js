@@ -14,40 +14,40 @@ var paths = {
 };
 
 gulp.task("templates", function() {
-    gulp.src(basePath + paths.templates + "/**/*.ascx")
+    return gulp.src(basePath + paths.templates + "/**/*.ascx")
         .pipe(changed(prodPath + paths.templates))
         .pipe(gulp.dest(prodPath + paths.templates))
 })
 
 gulp.task('js', function() {
-    gulp.src(basePath + paths.js + '/**/*.js')
+    return gulp.src(basePath + paths.js + '/**/*.js')
         .pipe(changed(prodPath + paths.js))
         .pipe(gulp.dest(prodPath + paths.js))
 });
 
 gulp.task('sass', function () {
-    gulp.src(basePath + paths.sass + '/*.scss')
+    return gulp.src(basePath + paths.sass + '/*.scss')
         .pipe(sass({
             style: 'compressed',
             sourcemap: false,
-            container: "gulp-ruby-sass-production"
+            container: "gulp-ruby-sass-production",
+            cacheLocation: ".sass-cache"
         }))
         .pipe(gulp.dest(basePath + paths.css))
 });
 
 gulp.task('sass-dev', function () {
-    gulp.src(basePath + paths.sass + '/*.scss')
-        .pipe(sourcemaps.init())
+    return gulp.src(basePath + paths.sass + '/mainGreen.scss')
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sass({
-            sourcemapPath: "",
-            sourcemap: false
+            cacheLocation: ".sass-cache2"
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(prodPath + paths.css));
 });
 
 gulp.task('startWatch', function () {
-    gulp.watch(basePath + paths.sass + '/**/*.scss', ['sass', 'sass-dev']);
+    gulp.watch(basePath + paths.sass + '/**/*.scss', ['sass-dev', 'sass']);
     gulp.watch(basePath + paths.js + '/**/*.js', ['js']);
     gulp.watch(basePath + paths.templates + '/**/*.ascx', ['templates']);
 });
