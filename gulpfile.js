@@ -37,7 +37,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass-dev', function () {
-    return gulp.src(basePath + paths.sass + '/mainGreen.scss')
+    return gulp.src(basePath + paths.sass + '/*.scss')
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sass({
             cacheLocation: ".sass-cache2"
@@ -54,4 +54,4 @@ gulp.task('startWatch', function () {
 
 gulp.task('watch', ['js', 'sass', 'sass-dev', 'templates', 'startWatch']);
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['js', 'sass']);
