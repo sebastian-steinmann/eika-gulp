@@ -45,11 +45,12 @@ gulp.task('sass-dev', function () {
             sourcemap: true,
             cacheLocation: ".sass-cache2"
         })
-        .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-
+        .on('error', function (err) {
+            notify.onError("Error: <%= err.message %>")
+        })
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(prodPath + paths.css))
-        .pipe(notify("Sass compiled"));;
+        .pipe(notify("Sass compiled"));
 });
 
 gulp.task('startWatch', function () {
